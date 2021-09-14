@@ -7,7 +7,7 @@ $(document).ready(()=>{
         type: 'GET',
         url: `https://superheroapi.com/api.php/1624468557751615/${$('#superHeroNumber').val()}`,
         dataType:'json',
-        contentType:'applicaton/json',
+        // contentType:'applicaton/json',
         //headers: {'Access-Control-Allow-Origin': 'https://superheroapi.com/api/', 'Accept': '*/*', 'User-Agent': 'Thunder Client (https://www.thunderclient.io)'},
         crossDomain: true,
         success: function (data){
@@ -57,7 +57,7 @@ let cargarInfo=(data)=>{
   $('#image').append(`<img src="${data.image.url}" class="img-fluid rounded-start" alt="superHeroImage">`);
   $('#cardContent').append(`<p class='fw-bold'>Nombre: ${data.name}</p>`);
   $('#cardContent').append(`<p>Conexiones: ${data.connections['group-affiliation']}</p>`);
-  $('#cardContent').append(`<ul class="list-group list-group-flush"><li class="list-group-item"><i>Publicado por: </i>${data.biography.publisher}</li><li class="list-group-item"><i>Ocupación: </i>${data.work.occupation}</li><li class="list-group-item"><i>Primera Aparición: </i>${data.biography['first-appearance']}</li><li class="list-group-item"><i>Altura: </i>${data.appearance.height}</li><li class="list-group-item"><i>Peso: </i>${data.appearance.weight}</li><li class="list-group-item"><i>Alianzas: </i>${data.biography.aliases}</li></ul>`);
+  $('#cardContent').append(`<ul class="list-group list-group-flush"><li class="list-group-item"><i>Publicado por: </i>${data.biography.publisher}</li><li class="list-group-item"><i>Ocupación: </i>${data.work.occupation}</li><li class="list-group-item"><i>Primera Aparición: </i>${data.biography['first-appearance']}</li><li class="list-group-item"><i>Altura: </i>${data.appearance.height.join(' - ')}</li><li class="list-group-item"><i>Peso: </i>${data.appearance.weight.join(' - ')}</li><li class="list-group-item"><i>Alianzas: </i>${data.biography.aliases. join(', ')}</li></ul>`);
 
 
   //Extraer powerstats a arreglo
@@ -94,5 +94,5 @@ let cargarInfo=(data)=>{
 }
 
 let msgError=()=>{
-
+  alert('Ingrese sólo números!')
 }
