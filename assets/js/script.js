@@ -12,9 +12,9 @@ $(document).ready(()=>{
         crossDomain: true,
         success: function (data){
           if (validate($('#superHeroNumber').val())==true){
-            mostrarCards();
             limpiarContenido();
             cargarInfo(data);
+            mostrarCards();
             window.scrollTo(0,document.body.scrollHeight);
           }
         },
@@ -32,17 +32,18 @@ $(document).ready(()=>{
  const regex = new RegExp('^[0-9]+$');
 
  //Función Validar
- let validate = (data) => {
+ let validate = (idSuperHero) => {
    //condition
    let condition = true;
-   if (regex.test(data) == false || data == "") {
+   if (regex.test(idSuperHero) == false || idSuperHero == "") {
      condition = false;
    }
    return condition;
  };
 
  let mostrarCards =()=>{
-   document.getElementById('cards').classList.remove('d-none');
+  //  document.getElementById('cards').classList.remove('d-none');
+  $('#cards').removeClass('d-none');
  }
 
  let limpiarContenido=()=>{
@@ -57,7 +58,7 @@ let cargarInfo=(data)=>{
   $('#image').append(`<img src="${data.image.url}" class="img-fluid rounded-start" alt="superHeroImage">`);
   $('#cardContent').append(`<p class='fw-bold'>Nombre: ${data.name}</p>`);
   $('#cardContent').append(`<p>Conexiones: ${data.connections['group-affiliation']}</p>`);
-  $('#cardContent').append(`<ul class="list-group list-group-flush"><li class="list-group-item"><i>Publicado por: </i>${data.biography.publisher}</li><li class="list-group-item"><i>Ocupación: </i>${data.work.occupation}</li><li class="list-group-item"><i>Primera Aparición: </i>${data.biography['first-appearance']}</li><li class="list-group-item"><i>Altura: </i>${data.appearance.height.join(' - ')}</li><li class="list-group-item"><i>Peso: </i>${data.appearance.weight.join(' - ')}</li><li class="list-group-item"><i>Alianzas: </i>${data.biography.aliases. join(', ')}</li></ul>`);
+  $('#cardContent').append(`<ul class="list-group list-group-flush"><li class="list-group-item"><i>Publicado por: </i>${data.biography.publisher}</li><li class="list-group-item"><i>Ocupación: </i>${data.work.occupation}</li><li class="list-group-item"><i>Primera Aparición: </i>${data.biography['first-appearance']}</li><li class="list-group-item"><i>Altura: </i>${data.appearance.height.join(' - ')}</li><li class="list-group-item"><i>Peso: </i>${data.appearance.weight.join(' - ')}</li><li class="list-group-item"><i>Alias: </i>${data.biography.aliases. join(', ')}</li></ul>`);
 
 
   //Extraer powerstats a arreglo
